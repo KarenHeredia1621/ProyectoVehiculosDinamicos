@@ -6,6 +6,10 @@ const inputModelo = document.getElementById("modelo");
 const inputKilometraje = document.getElementById("kilometraje");
 const inputPrecio = document.getElementById("precio");
 const contCard = document.getElementById("containerCars");
+const containerBtnCarrito = document.getElementById("containerBtnCarrito");
+const btnCarrito = document.getElementById("btnCarrito");
+const carrito = document.getElementById("carrito");
+const montoTotal = document.getAnimations("totalAmount");
 
 function createNewVehicle(foto, nombre, marca, modelo, kilometraje, precio) {
     // CONTENEDOR PRINCIPAL
@@ -113,4 +117,10 @@ function eventsToCard(containerCard) {
         containerCard.remove();
     });
 }
+
+
+
+
+
+
  

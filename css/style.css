@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
 body {
     font-family: "Poppins", sans-serif;
     background: #0d1117;
@@ -6,25 +8,24 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: "DM Sans", sans-serif;
 }
-
 section.container {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(79, 75, 75, 0.211);
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.638);
 }
 
 /* FORMULARIO */
 
 #form .form-control::placeholder{
-
   color: rgba(255, 255, 255, 0.338);
 
 }
 #form h2 {
     font-weight: 600;
-    color: #58a6ff;
+    color: #1277ebdd;
     margin-bottom: 20px;
 }
 
@@ -37,8 +38,7 @@ section.container {
 }
 
 #form .form-control:focus {
-    border-color: #58a6ff;
-    box-shadow: 0 0 8px rgba(88, 166, 255, 0.6);
+    border-color: #2171cc;
     background: #161b22;
 }
 
@@ -53,13 +53,13 @@ section.container {
 }
 
 #buttonCreateVehicle:hover {
-  background: #0d6dfd84;
+  background: #0458d6b4;
 }
 
 /* TARJETAS */
 #cont-cards h2 {
     font-weight: 600;
-    color: #0d6dfdd0;
+    color: #0d6dfdb4;
     margin-bottom: 20px;
 }
 
@@ -71,7 +71,7 @@ section.container {
 }
 
 .card:hover {
-    box-shadow: 0 10px 30px rgba(88, 166, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(104, 134, 169, 0.3);
 }
 
 .card img {
@@ -99,3 +99,9 @@ section.container {
     font-weight: 700;
     margin-top: 10px;
 }
+
+
+
+
+
+
