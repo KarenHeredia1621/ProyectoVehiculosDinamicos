@@ -1,88 +1,91 @@
-const form = document.getElementById("vehiculo-form");
-const inputFoto = document.getElementById("foto");
-const inputNombre = document.getElementById("nombre");
-const inputMarca = document.getElementById("marca");
-const inputModelo = document.getElementById("modelo");
-const inputKilometraje = document.getElementById("kilometraje");
-const inputPrecio = document.getElementById("precio");
-const contCard = document.getElementById("containerCars");
-const containerBtnCarrito = document.getElementById("containerBtnCarrito");
-const btnCarrito = document.getElementById("btnCarrito");
-const carrito = document.getElementById("carrito");
-const montoTotal = document.getAnimations("totalAmount");
+const containerCards = document.getElementById('containerCars')
+const buyVehicle = document.getElementById('button_buy');
+const containerVehicle = document.getElementById('vehicle_item');
+const btnCreateVehicle = document.getElementById('buttonCreateVehicle');
+const containerButtonsCard = document.getElementById('cont_buttons');
+const carInfo = document.getElementById('carInfo');
+const carGeneralInfo = document.getElementById('bodyCard');
+const form = document.getElementById('vehiculo-form');
+const inputFoto = document.getElementById('foto');
+const inputNombre = document.getElementById('nombre');
+const inputMarca = document.getElementById('marca');
+const inputModelo = document.getElementById('modelo');
+const inputKilometraje = document.getElementById('kilometraje');
+const inputPrecio = document.getElementById('precio');
+const buttonCarProduct = document.getElementById('btn_products');
+const side_bar = document.getElementById('side-bar')
+const containerBtnCar = document.getElementById('containerBtnCar');
+const countProducts = document.getElementById('car-count');
+const contProducts = document.getElementById('cont_products');
+const totalPriceContainer = document.getElementById('containerTotalPrice');
+const totalPrice = document.getElementById('totalPrice')
+let total = 0
+
 
 function createNewVehicle(foto, nombre, marca, modelo, kilometraje, precio) {
-    // CONTENEDOR PRINCIPAL
-    const containerCard = document.createElement("div");
-    containerCard.classList.add("col-md-6", "item-vehiculo");
+    // creo el elemento padre de la tarjeta
+    const containerTarget = document.createElement('div');
+    containerTarget.classList.add('col-md-6', 'item-vehiculo');
+    // creo el elemento hijo que contiene todo el cuerpo de la informacion con la foto 
+    const bodyCard = document.createElement('div');
+    bodyCard.classList.add('card', 'h-100');
+    // creamos la imagen
+    const img = document.createElement('img')
+    img.src = foto
+    // creamos el contenedor de toda la informacion del vehiculo
+    const carInfo = document.createElement('div');
+    carInfo.classList.add('card-body');
+    // creamos el h4 que contiene el nombre del vehiculo
+    const nameVehicle = document.createElement('h3');
+    nameVehicle.classList.add('card-title');
+    nameVehicle.textContent = 'Nombre: ' + nombre
+    // creamos el campo para la marca del vehiculo
+    const brandVehicle = document.createElement('h4');
+    brandVehicle.classList.add('card-subtitle', 'mb-2');
+    brandVehicle.textContent = 'Marca: ' + marca
+    // creamos el campo para el modelo del vehiculo
+    const modelVehicle = document.createElement('h4');
+    modelVehicle.classList.add('card-text');
+    modelVehicle.textContent = 'Modelo: ' + modelo
+    // creamos el campo para el kilometraje del vehiculo
+    const kmVehicle = document.createElement('h4');
+    kmVehicle.classList.add('card-km');
+    kmVehicle.textContent = 'Recorrido: ' + kilometraje + ' km'
+    // creamos el campo para el precio del vehiculo
+    const priceVehicle = document.createElement('h4');
+    priceVehicle.classList.add('text-success');
+    priceVehicle.textContent = 'Precio: $' + precio
+    // creamos el contenedor de los dos botones, comprar y eliminar
+    const containerButtons = document.createElement('div');
+    containerButtons.classList.add('d-flex', 'justify-content-between', 'mt-3')
+    // creamos el boton de comprar
+    const buttonBuy = document.createElement('button');
+    buttonBuy.classList.add('btn', 'btn-success')
+    buttonBuy.id = 'button_buy'
+    buttonBuy.textContent = 'Comprar';
+    // creamos el boton de eliminar
+    const buttonDeleteCard = document.createElement('button');
+    buttonDeleteCard.classList.add('btn', 'btn-danger')
+    buttonDeleteCard.id = 'button_delete'
+    buttonDeleteCard.textContent = 'Eliminar';
 
-    // CARD
-    const bodyCard = document.createElement("div");
-    bodyCard.classList.add("card", "h-100");
+    containerTarget.appendChild(bodyCard)
+    bodyCard.appendChild(img)
+    bodyCard.appendChild(carInfo)
+    carInfo.appendChild(nameVehicle);
+    carInfo.appendChild(brandVehicle)
+    carInfo.appendChild(modelVehicle)
+    carInfo.appendChild(kmVehicle)
+    carInfo.appendChild(priceVehicle)
+    carInfo.appendChild(containerButtons)
+    containerButtons.appendChild(buttonBuy)
+    containerButtons.appendChild(buttonDeleteCard)
 
-    // IMAGEN
-    const img = document.createElement("img");
-    img.src = foto;
-    img.classList.add("card-img-top");
-
-    // INFO
-    const infoCard = document.createElement("div");
-    infoCard.classList.add("card-body");
-
-    const nameVehicle = document.createElement("h3");
-    nameVehicle.classList.add("card-title");
-    nameVehicle.textContent = nombre;
-
-    const marcaVehicle = document.createElement("h4");
-    marcaVehicle.classList.add("card-subtitle", "text-muted");
-    marcaVehicle.textContent = marca;
-
-    const modeloVehicle = document.createElement("h4");
-    modeloVehicle.classList.add("card-text");
-    modeloVehicle.textContent = "Modelo: " + modelo;
-
-    const kilometrajeVehicle = document.createElement("h4");
-    kilometrajeVehicle.classList.add("card-text");
-    kilometrajeVehicle.textContent ="Kilometraje: " + kilometraje +" km" ;
-
-    const precioVehicle = document.createElement("h2");
-    precioVehicle.classList.add("text-success");
-    precioVehicle.textContent =  "$" + precio ;
-
-    // BOTONES
-    const containerButtons = document.createElement("div");
-    containerButtons.classList.add("d-flex", "justify-content-between", "mt-3");
-
-    const buttonBuyCard = document.createElement("button");
-    buttonBuyCard.classList.add("btn", "btn-success", "btn-comprar");
-    buttonBuyCard.textContent = "Comprar";
-
-    const buttonDeleteCard = document.createElement("button");
-    buttonDeleteCard.classList.add("btn", "btn-danger", "btn-eliminar");
-    buttonDeleteCard.textContent = "Eliminar";
-
-    // ARMAR CARD
-    containerCard.appendChild(bodyCard);
-    bodyCard.appendChild(img);
-    bodyCard.appendChild(infoCard);
-    infoCard.appendChild(nameVehicle);
-    infoCard.appendChild(marcaVehicle);
-    infoCard.appendChild(modeloVehicle);
-    infoCard.appendChild(kilometrajeVehicle);
-    infoCard.appendChild(precioVehicle);
-    infoCard.appendChild(containerButtons);
-    containerButtons.appendChild(buttonBuyCard);
-    containerButtons.appendChild(buttonDeleteCard);
-
-    // AÑADIR EVENTOS
-    eventsToCard(containerCard);
-
-    return containerCard;
+    return containerTarget;
 }
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
+form.addEventListener('submit', (m) => {
+    m.preventDefault()
     let foto = inputFoto.value.trim();
     const nombre = inputNombre.value.trim();
     const marca = inputMarca.value.trim();
@@ -91,81 +94,103 @@ form.addEventListener("submit", (e) => {
     const precio = inputPrecio.value.trim();
 
     if (!nombre || !marca || !modelo || !kilometraje || !precio) {
-        alert("TODOS LOS CAMPOS SON OBLIGATORIOS");
-        return;
+        alert('Todos los campos son obligatorios');
+    } else {
+        if (foto === '') {
+            foto = 'https://fotos.quecochemecompro.com/jeep-compass/jeep-compass-trasera.jpg?size=1200x800'
+        }
+        const newVehicle = createNewVehicle(foto, nombre, marca, modelo, kilometraje, precio)
+        containerCards.appendChild(newVehicle)
+        form.reset()
+        eventsToCard(newVehicle)
     }
-    else if (foto === "") {
-        foto = "https://casabritanica.com.co/wp-content/uploads/2024/05/Casa-britanica-renault-megane-e-tech-miniatura.webp";
-    }
+})
 
-    const newVehicle = createNewVehicle(foto, nombre, marca, modelo, kilometraje, precio);
-    contCard.appendChild(newVehicle);
+function eventsToCard(containerTarget) {
+    const buttonBuy = containerTarget.querySelector('#button_buy')
+    const buttonDelete = containerTarget.querySelector('#button_delete');
 
-    form.reset();
-});
-
-function eventsToCard(containerCard) {
-    const buttonBuy = containerCard.querySelector(".btn-comprar");
-    const buttonDelete = containerCard.querySelector(".btn-eliminar");
-
-    buttonDelete.addEventListener("click", () => {
-        containerCard.remove();
-    });
-
-    buttonBuy.addEventListener("click", () => {
-        alert("¡Has comprado el carro!");
-        containerCard.remove();
-    });
-}
-
-function createNewProducto(){
-    const containerTarget = document.createElement("div");
-    containerTarget.classList.add("productTarget");
-
-    const img = document.createElement("img");
-    img.src = foto;
-
-    const containerProductImg = document.createElement("div");
-    containerProductImg.classList.add("col-md-5", "containerImg");
-    
-    const containerProductInfo = document.createElement("div");
-    containerProductInfo.classList.add("col-md-7", "containerInfo");
-
-    const nameVehicleProductTarget = document.createElement("h3");
-    nameVehicleProductTarget.classList.add("card-title");
-    nameVehicleProductTarget.textContent = nombre;
-
-    const marcaVehicleProductTarget = document.createElement("h4");
-    marcaVehicleProductTarget.classList.add("card-subtitle", "text-muted");
-    marcaVehicleProductTarget.textContent = marca;
-
-    const precioVehicleProductTarget = document.createElement("h2");
-    precioVehicleProductTarget.classList.add("text-success");
-    precioVehicleProductTarget.textContent =  "$" + precio ;
-
-    const buttonDeleteProductTarget = document.createElement("button");
-    buttonDeleteProductTarget.classList.add("btn", "btn-danger", "btn-eliminar");
-    buttonDeleteProductTarget.textContent = "Eliminar";
-    buttonDeleteProductTarget.addEventListener('click', ()=>{
+    buttonDelete.addEventListener('click', () => {
         containerTarget.remove()
     })
+    buttonBuy.addEventListener('click', () => {
 
-    containerTarget.appendChild(containerProductImg);
-    containerTarget.appendChild(containerProductInfo);
-    containerProductImg.appendChild(img);
-    containerProductInfo.appendChild(nameVehicleProductTarget);
-    containerProductInfo.appendChild(marcaVehicleProductTarget);
-    containerProductInfo.appendChild(precioVehicleProductTarget);
-    containerProductInfo.appendChild(buttonDeleteProductTarget);
+        const foto = containerTarget.querySelector('img').src;
+        const nombre = containerTarget.querySelector('.card-title').textContent.replace('Nombre: ', '');
+        const marca = containerTarget.querySelector('.card-subtitle').textContent.replace('Marca: ', '');
+        const kilometraje = containerTarget.querySelector('.card-km').textContent.replace('Recorrido: ', '').replace(' km', '');
+        const precio = containerTarget.querySelector('.text-success').textContent.replace('Precio: $', '');
+
+        const cartItem = addProduct(foto, nombre, marca, kilometraje, precio)
+        contProducts.appendChild(cartItem)
+        countProducts.textContent = parseInt(countProducts.textContent) + 1;
+
+
+        total += parseInt(precio)
+        totalPrice.textContent = total
+        // for (let i = precio; i <= countProducts; i++) {
+        //     i + precio
+        // }
+    })
+}
+function addProduct(foto, nombre, marca, kilometraje, precio) {
+    // traigo la informacion que necesito de otra funcion con el valor devuelto de la misma
+    const newVehicleProduct = createNewVehicle(foto, nombre, marca, kilometraje, precio)
+
+    // creo la tarjeta que va a tener los datos de cada vehiculo a comprar
+    const containerTarget = document.createElement('div');
+    containerTarget.classList.add('targetProduct');
+    // creo la etiqueta img
+    const img = document.createElement('img');
+    img.src = foto;
+    // creo el espacio para las imagenes
+    const containerImg = document.createElement('div');
+    containerImg.classList.add('col-md-5', 'container-img')
+    containerImg.appendChild(img)
+
+    // creo el espacio para la informacion del vehiculo
+    const containerInfoVehicle = document.createElement('div')
+    containerInfoVehicle.classList.add('col-md-7', 'carInfoProduct');
+
+    // creo el espacio para mostrar el nombre del vehiculo
+    const nameVehicleProduct = document.createElement('h4')
+    nameVehicleProduct.classList.add('card-title');
+    nameVehicleProduct.textContent = 'Vehiculo: ' + nombre
+    // creo el espacio para mostrar la marca del vehiculo
+    const brandVehicleProduct = document.createElement('h4');
+    brandVehicleProduct.classList.add('card-subtitle', 'mb-2')
+    brandVehicleProduct.textContent = 'Marca: ' + marca
+    // creo el espacio para mostrar el kilometraje del vehiculo
+    const mileageCarProduct = document.createElement('h4');
+    mileageCarProduct.classList.add('card-km');
+    mileageCarProduct.textContent = 'Recorrido: ' + kilometraje + ' km';
+    // creo el espacio para mostrar el precio del vehiculo
+    const priceVehicleProduct = document.createElement('h4');
+    priceVehicleProduct.classList.add('text-success');
+    priceVehicleProduct.textContent = 'Precio: $' + precio
+    // creo el boton para eliminar la tarjeta
+    const buttonDeleteCard = document.createElement('button');
+    buttonDeleteCard.classList.add('btn', 'btn-danger')
+    buttonDeleteCard.id = 'button_delete'
+    buttonDeleteCard.textContent = 'Eliminar';
+    buttonDeleteCard.addEventListener('click', () => {
+        containerTarget.remove()
+        countProducts.textContent = parseInt(countProducts.textContent) - 1
+        total -= parseInt(precio)
+        totalPrice.textContent = total
+    })
+    containerInfoVehicle.appendChild(nameVehicleProduct)
+    containerInfoVehicle.appendChild(brandVehicleProduct)
+    containerInfoVehicle.appendChild(mileageCarProduct)
+    containerInfoVehicle.appendChild(priceVehicleProduct)
+    containerInfoVehicle.appendChild(buttonDeleteCard)
+    containerTarget.appendChild(containerImg)
+    containerTarget.appendChild(containerInfoVehicle)
 
     return containerTarget;
 }
-btnCarrito.addEventListener('click', ()=>{
-    carrito.classList.toggle('active')
-    containerBtnCarrito.classList.toggle('activeBtnCarrito')
+
+buttonCarProduct.addEventListener('click', () => {
+    side_bar.classList.toggle('active');
+    containerBtnCar.classList.toggle('classContainerBtnCar');
 })
-
-
-
-
- 
