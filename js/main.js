@@ -118,7 +118,52 @@ function eventsToCard(containerCard) {
     });
 }
 
+function createNewProducto(){
+    const containerTarget = document.createElement("div");
+    containerTarget.classList.add("productTarget");
 
+    const img = document.createElement("img");
+    img.src = foto;
+
+    const containerProductImg = document.createElement("div");
+    containerProductImg.classList.add("col-md-5", "containerImg");
+    
+    const containerProductInfo = document.createElement("div");
+    containerProductInfo.classList.add("col-md-7", "containerInfo");
+
+    const nameVehicleProductTarget = document.createElement("h3");
+    nameVehicleProductTarget.classList.add("card-title");
+    nameVehicleProductTarget.textContent = nombre;
+
+    const marcaVehicleProductTarget = document.createElement("h4");
+    marcaVehicleProductTarget.classList.add("card-subtitle", "text-muted");
+    marcaVehicleProductTarget.textContent = marca;
+
+    const precioVehicleProductTarget = document.createElement("h2");
+    precioVehicleProductTarget.classList.add("text-success");
+    precioVehicleProductTarget.textContent =  "$" + precio ;
+
+    const buttonDeleteProductTarget = document.createElement("button");
+    buttonDeleteProductTarget.classList.add("btn", "btn-danger", "btn-eliminar");
+    buttonDeleteProductTarget.textContent = "Eliminar";
+    buttonDeleteProductTarget.addEventListener('click', ()=>{
+        containerTarget.remove()
+    })
+
+    containerTarget.appendChild(containerProductImg);
+    containerTarget.appendChild(containerProductInfo);
+    containerProductImg.appendChild(img);
+    containerProductInfo.appendChild(nameVehicleProductTarget);
+    containerProductInfo.appendChild(marcaVehicleProductTarget);
+    containerProductInfo.appendChild(precioVehicleProductTarget);
+    containerProductInfo.appendChild(buttonDeleteProductTarget);
+
+    return containerTarget;
+}
+btnCarrito.addEventListener('click', ()=>{
+    carrito.classList.toggle('active')
+    containerBtnCarrito.classList.toggle('activeBtnCarrito')
+})
 
 
 
