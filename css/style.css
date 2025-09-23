@@ -100,6 +100,34 @@ section.container {
     margin-top: 10px;
 }
 
+#containerBtnCarrito{
+    display: flex;
+    justify-content: end;
+}
+
+ .active{
+    width: 500px;
+    background: red;
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    padding: 20px;
+    z-index: 99;
+}
+
+.activeBtnCarrito{
+    position: absolute;
+    left: 50px;
+}
+
+#carrito{
+    width: 500px;
+    background: red;
+    position: absolute;
+    top: 40px;
+    right: -800px;
+    padding: 20px;   
+}
 
 
 
