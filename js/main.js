@@ -30,8 +30,10 @@ function createNewVehicle(foto, nombre, marca, modelo, kilometraje, precio) {
     const bodyCard = document.createElement('div');
     bodyCard.classList.add('card', 'h-100');
     // creamos la imagen
-    const img = document.createElement('img')
-    img.src = foto
+    const img = document.createElement('img');
+    img.classList.add("fotos");
+    img.src = foto;
+    document.body.appendChild(img);
     // creamos el contenedor de toda la informacion del vehiculo
     const carInfo = document.createElement('div');
     carInfo.classList.add('card-body');
@@ -104,7 +106,40 @@ form.addEventListener('submit', (m) => {
         form.reset()
         eventsToCard(newVehicle)
     }
-})
+
+    //Anteriormente era un solo valor y ahora estamos alimentando un objeto con sus diferentes claves o valores
+    const newVehicle = {
+        foto : foto,
+        nombre : nombre,
+        marca : marca,
+        modelo : modelo,
+        kilometraje : kilometraje,
+        precio : precio
+    }
+
+    //Capturamos el arreglo existente en el localStorage o lo creamos vacío si no existe previamente
+    const vehiculosGuardados = JSON.parse(localStorage.getItem("vehiculos")) || [];
+
+    //Agregamos al arreglo[] vehiculosGuardados
+    vehiculosGuardados.push(newVehicle);
+
+    localStorage.setItem("vehiculos", JSON.stringify(vehiculosGuardados));
+    const vehiculoCreado = localStorage.getItem("vehiculo");
+
+
+    form.reset();
+
+});
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    const vehiculoCreado = localStorage.getItem("vehiculo");
+    if (vehiculoCreado) {
+        const objetoVehiculo = JSON.parse(vehiculoCreado)
+        inputMensaje.innerHTML = "El vehículo es: " + objetoVehiculo.foto + "<br>" + "nombre: " + objetoVehiculo.nombre + "<br>" + "marca: " + objetoVehiculo.marca + "<br>" + "modelo: " + objetoVehiculo.modelo + "<br>" + "Kilometraje: " + objetoVehiculo.kilometraje + "<br>" + "Precio: " + objetoVehiculo.precio;
+
+    }
+});
+
 
 function eventsToCard(containerTarget) {
     const buttonBuy = containerTarget.querySelector('#button_buy')
@@ -113,15 +148,17 @@ function eventsToCard(containerTarget) {
     buttonDelete.addEventListener('click', () => {
         containerTarget.remove()
     })
+
     buttonBuy.addEventListener('click', () => {
 
         const foto = containerTarget.querySelector('img').src;
         const nombre = containerTarget.querySelector('.card-title').textContent.replace('Nombre: ', '');
         const marca = containerTarget.querySelector('.card-subtitle').textContent.replace('Marca: ', '');
+        const modelo = containerTarget.querySelector('.card-text').textContent.replace('Modelo:', '');
         const kilometraje = containerTarget.querySelector('.card-km').textContent.replace('Recorrido: ', '').replace(' km', '');
         const precio = containerTarget.querySelector('.text-success').textContent.replace('Precio: $', '');
 
-        const cartItem = addProduct(foto, nombre, marca, kilometraje, precio)
+        const cartItem = addProduct(foto, nombre, marca, modelo, kilometraje, precio)
         contProducts.appendChild(cartItem)
         countProducts.textContent = parseInt(countProducts.textContent) + 1;
 
@@ -133,9 +170,9 @@ function eventsToCard(containerTarget) {
         // }
     })
 }
-function addProduct(foto, nombre, marca, kilometraje, precio) {
+function addProduct(foto, nombre, marca, modelo, kilometraje, precio) {
     // traigo la informacion que necesito de otra funcion con el valor devuelto de la misma
-    const newVehicleProduct = createNewVehicle(foto, nombre, marca, kilometraje, precio)
+    const newVehicleProduct = createNewVehicle(foto, nombre, marca, modelo,modelo, kilometraje, precio)
 
     // creo la tarjeta que va a tener los datos de cada vehiculo a comprar
     const containerTarget = document.createElement('div');
@@ -160,6 +197,10 @@ function addProduct(foto, nombre, marca, kilometraje, precio) {
     const brandVehicleProduct = document.createElement('h4');
     brandVehicleProduct.classList.add('card-subtitle', 'mb-2')
     brandVehicleProduct.textContent = 'Marca: ' + marca
+
+    const modelVehicleProduct = document.createElement('h4');
+    modelVehicleProduct.classList.add('card-text');
+    modelVehicleProduct.textContent = 'Modelo: ' + modelo
     // creo el espacio para mostrar el kilometraje del vehiculo
     const mileageCarProduct = document.createElement('h4');
     mileageCarProduct.classList.add('card-km');
@@ -181,11 +222,27 @@ function addProduct(foto, nombre, marca, kilometraje, precio) {
     })
     containerInfoVehicle.appendChild(nameVehicleProduct)
     containerInfoVehicle.appendChild(brandVehicleProduct)
+    containerInfoVehicle.appendChild(modelVehicleProduct)
     containerInfoVehicle.appendChild(mileageCarProduct)
     containerInfoVehicle.appendChild(priceVehicleProduct)
     containerInfoVehicle.appendChild(buttonDeleteCard)
     containerTarget.appendChild(containerImg)
     containerTarget.appendChild(containerInfoVehicle)
+
+    const newVehicleCard = {
+        foto : foto,
+        nombre : nombre,
+        marca : marca,
+        modelo : modelo,
+        kilometraje : kilometraje,
+        precio : precio
+    }
+
+    const vehiculosGuardadosCard = JSON.parse(localStorage.getItem("vehiculosCard")) || [];
+    vehiculosGuardadosCard.push(newVehicleCard);
+
+        localStorage.setItem("vehiculosCard", JSON.stringify(vehiculosGuardadosCard));
+
 
     return containerTarget;
 }

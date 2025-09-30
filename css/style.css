@@ -10,6 +10,12 @@ body {
 }
 
 /* TITULOS */
+
+h1{
+    text-align: center;
+    padding-top: 30px;
+}
+
 h2 {
     font-weight: 700;
     color: #8a8686; 
@@ -19,6 +25,15 @@ h3,
 h4 {
     margin-bottom: 0.5rem;
     color: #0a2c3a; 
+}
+
+a {
+    color: #f1f0f0;
+    text-decoration: none;
+    padding: 10px;
+    background: #075985;
+    border-radius: 20px;
+    margin-top: 20px;
 }
 
 /* FORMULARIO */
@@ -236,6 +251,11 @@ section {
     color: #fff; 
 }
 
+.targetProduct .card-text {
+    font-size: 1rem;
+    color: #fff; 
+}
+
 .targetProduct .card-subtitle {
     font-size: 1rem;
     color: #ececec;
@@ -248,4 +268,43 @@ section {
 
 .targetProduct .carInfoProduct {
     padding: 10px;
+}
+
+/* Tabla */
+table {
+  border: 1px solid #dcdcdc;
+  margin: 30px auto;
+  width: 80%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.08);
+  border-collapse: collapse;
+}
+
+table td, table tr {
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
+table thead {
+  background: #8a8686;
+  color: #fff;
+  font-weight: 600;
+}
+
+table thead td {
+  padding: 50px;
+}
+
+table{
+    font-size: 20px;
+}
+
+button{
+  background: #8a8686;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  padding: 15px;
 }
